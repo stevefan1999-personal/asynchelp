@@ -1,0 +1,35 @@
+[workspace]
+members = [
+    "proc_macros",
+]
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Steve Fan"]
+license = "MIT"
+edition = "2021"
+
+[package]
+name = "asynchelp"
+description = "Some simple helpers for some common async services"
+
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+edition.workspace = true
+
+[dependencies]
+asynchelp-macros = { version = "0.1.0", path = "./proc_macros" }
+
+[dev-dependencies]
+stackfuture = "0.3.0"
+tarpc = "0.31.0"
+
+[features]
+stackfuture = ["asynchelp-macros/stackfuture"]
+tarpc = ["asynchelp-macros/tarpc"]
+
+[[test]]
+name = "tarpc-stackfuture"
+required-features = ["stackfuture", "tarpc"]
+path = "tests/tarpc/stackfuture.rs"
